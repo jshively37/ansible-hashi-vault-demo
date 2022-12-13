@@ -39,6 +39,8 @@ hvac==1.0.2  # Needed by Ansible's HashiCorp Vault Lookup Plugin
 
 ## Playbook Execution
 
+To run the playbook: `ansible-playbook -i inventory/ vault_demo.yml`
+
 Core router 1 state before:
 
 ![images/before_run.png](images/before_run.png)
