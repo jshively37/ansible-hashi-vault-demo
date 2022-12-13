@@ -1,9 +1,8 @@
-# Ansible and HashiCorp Vault
+# Cisco using Ansible and HashiCorp Vault
 
 This is an example repo showing Ansible connecting to HashiCorp Vault to retrieve a username, password, and SNMP information stored in a simple K/V store.
 
-The retrieve username and password is used to update SNMP on the device.
-
+The retrieve username and password is used to update SNMP on a Cisco router.
 
 ## Vault Config
 
@@ -17,10 +16,30 @@ Vault is configured with a simple KV store. The information is stored in Vault u
 
 ![images/vault_kv.png](images/vault_kv.png)
 
+Each secret contains the following information:
+
+![images/secret_store.png](images/secret_store.png)
+
+
+## Ansible inventory
+
+A simple Ansible inventory has been provided in `inventory/hosts.yml`.
+
+## Consuming
+
+A `requirements.txt` and `Pipfile` file has been included with all the dependancies.
+
+The following dependanices are required for a manual install:
+```
+python==3.11.0
+ansible==7.1.0
+paramiko==2.12.0  # Needed to connect to the devices
+hvac==1.0.2  # Needed by the HashiCorp Vault Lookup Plugin
+```
 
 ## Playbook Execution
 
-Router state before:
+Core router 1 state before:
 
 ![images/before_run.png](images/before_run.png)
 
@@ -30,6 +49,6 @@ Playbook Execution:
 ![images/playbook_run.png](images/playbook_run.png)
 
 
-Router state after:
+Core router 1 state after:
 
 ![images/after_run.png](images/after_run.png)
