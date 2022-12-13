@@ -33,8 +33,8 @@ The following dependanices are required for a manual install:
 ```
 python==3.11.0
 ansible==7.1.0
-paramiko==2.12.0  # Needed to connect to the devices
-hvac==1.0.2  # Needed by the HashiCorp Vault Lookup Plugin
+paramiko==2.12.0  # Needed by Ansible Cisco IOS
+hvac==1.0.2  # Needed by Ansible's HashiCorp Vault Lookup Plugin
 ```
 
 ## Playbook Execution
