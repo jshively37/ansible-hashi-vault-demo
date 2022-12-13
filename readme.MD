@@ -13,7 +13,7 @@ export VAULT_SERVER=''
 export VAULT_TOKEN=''
 ```
 
-Vault is configured with a simple KV store with the following information:
+Vault is configured with a simple KV store. The information is stored in Vault under a secret matching the `inventory_hostname`:
 
 ![images/vault_kv.png](images/vault_kv.png)
 

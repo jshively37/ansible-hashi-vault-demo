@@ -5,22 +5,24 @@
   gather_facts: false
 
   tasks:
-    - name: GET LOGIN INFO FROM VAULT
-      ansible.builtin.set_fact:
-        home_router: "{{ lookup('hashi_vault', 'secret=kv/data/home_router') }}"
+    - name: Update Router
+      block:
+        - name: GET LOGIN INFO FROM VAULT
+          ansible.builtin.set_fact:
+            home_router: "{{ lookup('hashi_vault', 'secret=kv/data/' + inventory_hostname) }}"
 
-    - name: SET VARIABLES
-      ansible.builtin.set_fact:
-        ansible_user: "{{ home_router['username'] }}"
-        ansible_ssh_pass: "{{ home_router['password'] }}"
-        snmp_ro_string: "{{ home_router['snmp_ro_string'] }}"
-        snmp_rw_string: "{{ home_router['snmp_rw_string'] }}"
+        - name: SET VARIABLES
+          ansible.builtin.set_fact:
+            ansible_user: "{{ home_router['username'] }}"
+            ansible_ssh_pass: "{{ home_router['password'] }}"
+            snmp_ro_string: "{{ home_router['snmp_ro_string'] }}"
+            snmp_rw_string: "{{ home_router['snmp_rw_string'] }}"
 
-    - name: Update SNMP String
-      cisco.ios.ios_snmp_server:
-        config:
-          communities:
-            - name: "{{ snmp_rw_string }}"
-              rw: true
-            - name: "{{ snmp_ro_string }}"
-              ro: true
+        - name: Update SNMP String
+          cisco.ios.ios_snmp_server:
+            config:
+              communities:
+                - name: "{{ snmp_rw_string }}"
+                  rw: true
+                - name: "{{ snmp_ro_string }}"
+                  ro: true
