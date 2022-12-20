@@ -9,7 +9,7 @@
       block:
         - name: GET LOGIN INFO FROM VAULT
           ansible.builtin.set_fact:
-            home_router: "{{ lookup('hashi_vault', 'secret=kv/data/' + inventory_hostname) }}"
+            home_router: "{{ lookup('hashi_vault', 'namespace=admin secret=kv/data/network_devices/' + inventory_hostname) }}"
 
         - name: SET VARIABLES
           ansible.builtin.set_fact:
