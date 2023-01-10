@@ -26,3 +26,4 @@
                   rw: true
                 - name: "{{ snmp_ro_string }}"
                   ro: true
+            state: "{{ desired_state | d('replaced') }}"
